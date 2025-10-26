@@ -26,29 +26,15 @@ public class AuctionController {
 
     @GetMapping("/start/{auctionNumber}")
     public ResponseEntity<AuctionDTO> startAuction(@PathVariable Integer chitId, @PathVariable Integer auctionNumber) {
-        ChitDTO chitDTO = getChitDTO();
-        AuctionDTO auctionDTO = auctionService.conductAuction(chitDTO, auctionNumber);
+        AuctionDTO auctionDTO = auctionService.conductAuction(chitId, auctionNumber);
         return ResponseEntity.ok(auctionDTO);
     }
 
     @GetMapping("/close/{auctionNumber}/{finalAuctionAmount}")
     public ResponseEntity<AuctionDTO> closeAuction(@PathVariable Integer chitId, @PathVariable Integer auctionNumber, @PathVariable Double finalAuctionAmount) {
-        ChitDTO chitDTO = getChitDTO();
-        AuctionDTO auctionDTO = auctionService.conductAuction(chitDTO, auctionNumber);
+        AuctionDTO auctionDTO = auctionService.conductAuction(chitId, auctionNumber);
         auctionDTO.setFinalAuctionAmount(finalAuctionAmount);
         auctionService.closeAuction(auctionDTO, finalAuctionAmount);
         return ResponseEntity.ok(auctionDTO);
-    }
-
-    private ChitDTO getChitDTO() {
-        return ChitDTO.builder()
-                .number(1)
-                .principleAmount(100000.0)
-                .monthlyPayment(5000.0)
-                .durationInMonths(20)
-                .sskCommissionRate(2.5)
-                .memberComissionRate(0.5)
-                .memberCount(20)
-                .build();
     }
 }

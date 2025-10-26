@@ -13,10 +13,14 @@ import org.ssksamaj.app.dto.ChitDTO;
 public class AuctionService {
     private static final Logger LOGGER = LoggerFactory.getLogger(AuctionService.class);
 
-    private AuctionService() {
+    private final ChitService chitService;
+
+    public AuctionService(ChitService chitService) {
+        this.chitService = chitService;
     }
     
-    public AuctionDTO conductAuction(final ChitDTO chitDTO, Integer auctionNumber) {
+    public AuctionDTO conductAuction(final Integer chitId, Integer auctionNumber) {
+        ChitDTO chitDTO = chitService.getChitDetails(chitId);
         AuctionDTO auctionDTO = AuctionDTO.builder()
             .isClosed(false)
             .chitDTO(chitDTO)
