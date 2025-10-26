@@ -3,7 +3,6 @@ package org.ssksamaj.app.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.ssksamaj.app.dto.AuctionDTO;
-import org.ssksamaj.app.dto.ChitDTO;
 import org.ssksamaj.app.service.AuctionService;
 
 import org.slf4j.Logger;
